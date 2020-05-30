@@ -1,0 +1,28 @@
+<div style="margin:5px;">
+
+  <h2 style="text-align:center">
+    Tabulator grid wrapped in an angular component &lt;app-tabulator-grid&gt;
+  </h2>
+
+  <div style="width: 90%; margin-top: 20px;">
+    <!-- this is the tabulator grid (wrapped inside an angular component) -->
+    <app-tabulator-grid [tableData]="tableData"
+                        [columnConfig]="columnConfig"
+                        [height]="'320px'"
+                        [dateFormat]="dateFormat"
+                        (cellChanged)="onCellChanged($event)">
+    </app-tabulator-grid>
+
+    <!-- These fields are to show that grid tabulator grid events can be passed between components as regular angular events.
+      The changes that the user makes to the grid data are shown here.
+      -->
+    <div style="background-color: lightblue">
+      <p>
+        Changes:
+      </p>
+      <div style="margin-left:10px">{{updateInfo}}</div>
+      <br />
+    </div>
+
+  </div>
+</div>
