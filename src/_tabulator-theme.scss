@@ -1,11 +1,15 @@
 @mixin Tabulator-default-theme($theme) {
   // Material like variables...
   // ...if you have theming in you app - then you should set these variables from the theme.
-  $background-color: white;
-  $foreground-color: black;
-  $primary-color: darkblue;
-  $accent-color: pink;
 
+  // $primary: map-get($theme, primary);
+
+  $background-color: white; // mat-color(map-get($theme, background), card);
+  $foreground-color: black; // mat-color(map-get($theme, foreground), text);
+  $primary-color: darkblue; // mat-color($primary);
+  $accent-color: pink; // mat-color(map-get($theme, accent));
+  $default-contrast-color: white; // mat-color($primary, default-contrast);
+  // now set the grid's colours
 
   //Main Theme Variables
   $backgroundColor: $background-color !default; //background color of tabulator
@@ -13,13 +17,13 @@
   $textSize: 14px !default; //table text size
   //header themeing
   $headerBackgroundColor: mix($background-color, $primary-color, 10) !default; //border to tabulator
-  $headerTextColor: mix($background-color, $primary-color, 90) !default; //header text colour
+  $headerTextColor: mix($primary-color, $default-contrast-color, 25) !default; //header text colour
   $headerBorderColor: mix($background-color, $primary-color, 67) !default; //header border color
   $headerSeperatorColor: mix($background-color, $primary-color, 60) !default; //header bottom seperator color
   $headerMargin: 4px !default; //padding round header
   //column header arrows
-  $sortArrowActive: mix($background-color, $primary-color, 95) !default;
-  $sortArrowInactive: mix($background-color, $primary-color, 40) !default;
+  $sortArrowActive: mix($primary-color, $default-contrast-color, 25) !default;
+  $sortArrowInactive: mix($primary-color, $default-contrast-color, 55) !default;
 
   //row themeing
   $rowBackgroundColor: $background-color !default; //table row background color
