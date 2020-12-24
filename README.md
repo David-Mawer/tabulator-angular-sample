@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Then I made a few edits to add the [tabulator grid](https://github.com/olifolkerd/tabulator) - and wrap it in its own component.
 
+(Angular version is now 11.0.5)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
