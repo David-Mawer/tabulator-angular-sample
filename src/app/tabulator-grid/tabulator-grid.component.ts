@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnChanges, Input, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
 // tabular grid: https://github.com/olifolkerd/tabulator
-import Tabulator from 'tabulator-tables';
+import {TabulatorFull as Tabulator} from 'tabulator-tables';
 import * as moment from 'moment';
 
 /*
@@ -83,14 +83,14 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
         columns: this.columnConfig,
         layout: 'fitData',
         height: this.height,
-        // pass some of the events back to the declaring code.
-        // for a list of events: http://tabulator.info/docs/4.6/callbacks
-        tableBuilding: this.tableBuilding.bind(this),
-        tableBuilt: this.tableBuilt.bind(this),
-        cellEdited: this.cellEdited.bind(this),
-        dataLoading: this.dataLoading.bind(this),
-        dataLoaded: this.dataLoaded.bind(this)
       });
+      // Capture some of the events and pass them back to the declaring code.
+      // http://tabulator.info/docs/5.0/events
+      this.myTable.on('tableBuilding', this.tableBuilding.bind(this));
+      this.myTable.on('tableBuilt', this.tableBuilt.bind(this));
+      this.myTable.on('cellEdited', this.cellEdited.bind(this));
+      this.myTable.on('dataLoading', this.dataLoading.bind(this));
+      this.myTable.on('dataLoaded', this.dataLoaded.bind(this));
       this.wrapperDiv.nativeElement.appendChild(this.tableDiv);
 
     } else {
