@@ -1,4 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
+import { Tabulator } from 'tabulator-tables';
 
 @Component({
   selector: 'app-test',
@@ -21,7 +22,15 @@ export class TestComponent {
       { title: "Name", field: "name", width: 150, editor: "input" },
       { title: "Location", field: "location", width: 130, editor: "autocomplete", editorParams: { allowEmpty: true, showListOnEmpty: true, values: true } },
       { title: "Progress", field: "progress", sorter: "number", hozAlign: "left", formatter: "progress", width: 140, editor: true },
-      { title: "Gender", field: "gender", width: 90, editor: "select", editorParams: { values: { "male": "Male", "female": "Female", "unknown": "Unknown" } } },
+      { title: "Gender", field: "gender", width: 90, editor: "list",
+        editorParams: {
+          values: [
+            { value: "male", label: "Male" },
+            { value: "female", label: "Female" },
+            { value: "unknown", label: "Unknown" }
+          ]
+        }
+      },
       { title: "Rating", field: "rating", formatter: "star", hozAlign: "center", width: 100, editor: true },
       { title: "Date Of Birth", field: "dob", hozAlign: "center", sorter: "date", width: 140 },
       { title: "Driver", field: "car", width: 80, hozAlign: "center", editor: true, formatter: "tickCross" }
@@ -40,9 +49,9 @@ export class TestComponent {
     ];
   }
 
-  public onCellChanged(data: any) {
-    var colName: string = data._cell.column.field;
-    var newRowData: {} = data._cell.row.data;
+  public onCellChanged(data: Tabulator.CellComponent) {
+    var colName: string = data.getColumn().getField();
+    var newRowData: any = data.getRow().getData();
     var sInfo: string = 'Change for "' + newRowData['name'] + '" (id=' + newRowData['id'] + '): Field [' + colName + '] Changed to ' + newRowData[colName];
     console.log(sInfo);
     this.updateInfo = sInfo;

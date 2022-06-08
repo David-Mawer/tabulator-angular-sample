@@ -859,7 +859,7 @@
     }
   }
 
-  .tabulator-edit-select-list {
+  .tabulator-edit-list {
     position: absolute;
     display: inline-block;
     box-sizing: border-box;
@@ -871,7 +871,7 @@
     -webkit-overflow-scrolling: touch;
     z-index: 10000;
 
-    .tabulator-edit-select-list-item {
+    .tabulator-edit-list-item {
       padding: 4px;
       color: $rowTextColor;
 
@@ -887,13 +887,13 @@
       }
     }
 
-    .tabulator-edit-select-list-notice {
+    .tabulator-edit-list-notice {
       padding: 4px;
       color: $rowTextColor;
       text-align: center;
     }
 
-    .tabulator-edit-select-list-group {
+    .tabulator-edit-list-group {
       border-bottom: 1px solid $rowBorderColor;
       padding: 4px;
       padding-top: 6px;

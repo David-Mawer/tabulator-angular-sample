@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnChanges, Input, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
 // tabular grid: https://github.com/olifolkerd/tabulator
-import {TabulatorFull as Tabulator} from 'tabulator-tables';
+import { Tabulator, TabulatorFull } from 'tabulator-tables';
 import * as moment from 'moment';
 
 /*
@@ -21,7 +21,7 @@ import * as moment from 'moment';
   styleUrls: ['./tabulator-grid.component.scss']
 })
 export class TabulatorGridComponent implements OnChanges, OnDestroy {
-  @ViewChild('tabularGridWrapper', { static: true }) wrapperDiv: ElementRef<HTMLDivElement>;
+  @ViewChild('tabularGridWrapper', { static: true }) wrapperDiv!: ElementRef<HTMLDivElement>;
 
   @Input() tableData: any[] = [];
   @Input() columnConfig: any[] = [];
@@ -32,7 +32,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   @Output() builtTable = new EventEmitter<void>();
   @Output() loadingData = new EventEmitter<any[]>();
   @Output() loadedData = new EventEmitter<any[]>();
-  @Output() cellChanged = new EventEmitter<any>();
+  @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
 
   // private variables for keeping track of the table.
   private tableDiv = document.createElement('div'); // this is the div that will contain that tabulator-grid HTML.
@@ -77,7 +77,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
       // create the table with the given Angular parameters
       // for details about the Tabulator parameters - check http://tabulator.info/docs/4.2/options
-      this.myTable = new Tabulator(this.tableDiv, {
+      this.myTable = new TabulatorFull(this.tableDiv, {
         data: this.tableData || [],
         reactiveData: true, // enable data reactivity - means that array content changes get reflected by the grid (without Angular having to worry)
         columns: this.columnConfig,
@@ -95,10 +95,10 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
     } else {
       // Check what changed, and only update that stuff
-      if (changes.columnConfig) {
+      if (changes['columnConfig']) {
         this.myTable.setColumns(this.columnConfig);
       }
-      if (changes.tableData) {
+      if (changes['tableData']) {
         this.myTable.setData(this.tableData);
       }
 
@@ -114,8 +114,8 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   private tableBuilt() {
     this.builtTable.emit();
   }
-  private cellEdited(cell) {
-    //cell - cell component
+  private cellEdited(cell: Tabulator.CellComponent) {
+    //cell - cell 
     this.cellChanged.emit(cell);
   }
   private dataLoading(data: any[]) {
@@ -132,7 +132,9 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
   //////////////////////////////////////////////////////////////////
   // Date Handling: Begin
-  private dateSorter(a, b, aRow, bRow, column, dir, sorterParams) {
+  private dateSorter(a: any, b: any,
+    aRow: Tabulator.RowComponent, bRow: Tabulator.RowComponent, column: Tabulator.ColumnComponent,
+     dir: any, sorterParams: any) {
     //a, b - the two values being compared
     //aRow, bRow - the row components for the values being compared (useful if you need to access additional fields in the row data for the sort)
     //column - the column component for the column being sorted
@@ -140,11 +142,10 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //sorterParams - sorterParams object from column definition array
     var date1 = moment(a, this.dateFormat);
     var date2 = moment(b, this.dateFormat);
-
     return date1.diff(date2, "seconds"); // return the difference between the two dates
   }
 
-  private dateEditor(cell, onRendered, success, cancel) {
+  private dateEditor(cell: Tabulator.CellComponent, onRendered: Function, success: Function, cancel: Function) {
     //cell - the cell component for the editable cell
     //onRendered - function to call when the editor has been rendered
     //success - function to call to pass the successfuly updated value to Tabulator
