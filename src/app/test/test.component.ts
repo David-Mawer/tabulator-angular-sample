@@ -20,7 +20,7 @@ export class TestComponent {
   constructor(private changeRef: ChangeDetectorRef) {
     this.columnConfig = [
       { title: "Name", field: "name", width: 150, editor: "input" },
-      { title: "Location", field: "location", width: 130, editor: "autocomplete", editorParams: { allowEmpty: true, showListOnEmpty: true, values: true } },
+      { title: "Location", field: "location", width: 130, editor: "list", editorParams: { autocomplete: true, allowEmpty: true, showListOnEmpty: true, valuesLookup: true } },
       { title: "Progress", field: "progress", sorter: "number", hozAlign: "left", formatter: "progress", width: 140, editor: true },
       { title: "Gender", field: "gender", width: 90, editor: "list",
         editorParams: {
