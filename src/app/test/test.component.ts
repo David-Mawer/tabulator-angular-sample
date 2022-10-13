@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { Tabulator } from 'tabulator-tables';
+import { CellComponent } from 'tabulator-tables';
 
 @Component({
   selector: 'app-test',
@@ -49,7 +49,7 @@ export class TestComponent {
     ];
   }
 
-  public onCellChanged(data: Tabulator.CellComponent) {
+  public onCellChanged(data: CellComponent) {
     var colName: string = data.getColumn().getField();
     var newRowData: any = data.getRow().getData();
     var sInfo: string = 'Change for "' + newRowData['name'] + '" (id=' + newRowData['id'] + '): Field [' + colName + '] Changed to ' + newRowData[colName];

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnChanges, Input, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
 // tabular grid: https://github.com/olifolkerd/tabulator
-import { Tabulator, TabulatorFull } from 'tabulator-tables';
+import { CellComponent, ColumnComponent, RowComponent, TabulatorFull } from 'tabulator-tables';
 import * as moment from 'moment';
 
 /*
@@ -32,7 +32,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   @Output() builtTable = new EventEmitter<void>();
   @Output() loadingData = new EventEmitter<any[]>();
   @Output() loadedData = new EventEmitter<any[]>();
-  @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
+  @Output() cellChanged = new EventEmitter<CellComponent>();
 
   // private variables for keeping track of the table.
   private tableDiv = document.createElement('div'); // this is the div that will contain that tabulator-grid HTML.
@@ -114,7 +114,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   private tableBuilt() {
     this.builtTable.emit();
   }
-  private cellEdited(cell: Tabulator.CellComponent) {
+  private cellEdited(cell: CellComponent) {
     //cell - cell 
     this.cellChanged.emit(cell);
   }
@@ -133,7 +133,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   //////////////////////////////////////////////////////////////////
   // Date Handling: Begin
   private dateSorter(a: any, b: any,
-    aRow: Tabulator.RowComponent, bRow: Tabulator.RowComponent, column: Tabulator.ColumnComponent,
+    aRow: RowComponent, bRow: RowComponent, column: ColumnComponent,
      dir: any, sorterParams: any) {
     //a, b - the two values being compared
     //aRow, bRow - the row components for the values being compared (useful if you need to access additional fields in the row data for the sort)
@@ -145,7 +145,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     return date1.diff(date2, "seconds"); // return the difference between the two dates
   }
 
-  private dateEditor(cell: Tabulator.CellComponent, onRendered: Function, success: Function, cancel: Function) {
+  private dateEditor(cell: CellComponent, onRendered: Function, success: Function, cancel: Function) {
     //cell - the cell component for the editable cell
     //onRendered - function to call when the editor has been rendered
     //success - function to call to pass the successfuly updated value to Tabulator
