@@ -13,27 +13,27 @@
 
   //Main Theme Variables
   $backgroundColor: $background-color !default; //background color of tabulator
-  $borderColor: mix($background-color, $foreground-color, 90) !default; //border to tabulator
+  $borderColor: mix($background-color, $foreground-color, 90%) !default; //border to tabulator
   $textSize: 14px !default; //table text size
   //header themeing
-  $headerBackgroundColor: mix($background-color, $primary-color, 10) !default; //border to tabulator
-  $headerTextColor: mix($primary-color, $default-contrast-color, 25) !default; //header text colour
-  $headerBorderColor: mix($background-color, $primary-color, 67) !default; //header border color
-  $headerSeperatorColor: mix($background-color, $primary-color, 60) !default; //header bottom seperator color
+  $headerBackgroundColor: mix($background-color, $primary-color, 10%) !default; //border to tabulator
+  $headerTextColor: mix($primary-color, $default-contrast-color, 25%) !default; //header text colour
+  $headerBorderColor: mix($background-color, $primary-color, 67%) !default; //header border color
+  $headerSeperatorColor: mix($background-color, $primary-color, 60%) !default; //header bottom seperator color
   $headerMargin: 4px !default; //padding round header
   //column header arrows
-  $sortArrowActive: mix($primary-color, $default-contrast-color, 25) !default;
-  $sortArrowInactive: mix($primary-color, $default-contrast-color, 55) !default;
+  $sortArrowActive: mix($primary-color, $default-contrast-color, 25%) !default;
+  $sortArrowInactive: mix($primary-color, $default-contrast-color, 55%) !default;
 
   //row themeing
   $rowBackgroundColor: $background-color !default; //table row background color
-  $rowAltBackgroundColor: mix($background-color, $primary-color, 85) !default; //table row background color
-  $rowBorderColor: mix($background-color, $foreground-color, 67) !default; //table border color
-  $rowTextColor: mix($background-color, $foreground-color, 10) !default; //table text color
-  $rowHoverBackground: mix($background-color, $accent-color, 73) !default; //row background color on hover
+  $rowAltBackgroundColor: mix($background-color, $primary-color, 85%) !default; //table row background color
+  $rowBorderColor: mix($background-color, $foreground-color, 67%) !default; //table border color
+  $rowTextColor: mix($background-color, $foreground-color, 10%) !default; //table text color
+  $rowHoverBackground: mix($background-color, $accent-color, 73%) !default; //row background color on hover
 
-  $rowSelectedBackground: mix($background-color, $primary-color, 75) !default; //row background color when selected
-  $rowSelectedBackgroundHover: mix($background-color, $primary-color, 85) !default; //row background color when selected and hovered
+  $rowSelectedBackground: mix($background-color, $primary-color, 75%) !default; //row background color when selected
+  $rowSelectedBackgroundHover: mix($background-color, $primary-color, 85%) !default; //row background color when selected and hovered
 
   $editBoxColor: #1D68CD !default; //border color for edit boxes
   $errorColor: #dd0000 !default; //error indication
@@ -813,7 +813,7 @@
         display: inline-block;
         width: 0;
         height: 0;
-        margin-right: 16px;
+        margin-right: 1em;
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
         border-right: 0;
