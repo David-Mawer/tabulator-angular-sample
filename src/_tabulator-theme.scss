@@ -4,11 +4,11 @@
 
   // $primary: map-get($theme, primary);
 
-  $background-color: white; // mat-color(map-get($theme, background), card);
-  $foreground-color: black; // mat-color(map-get($theme, foreground), text);
-  $primary-color: darkblue; // mat-color($primary);
-  $accent-color: pink; // mat-color(map-get($theme, accent));
-  $default-contrast-color: white; // mat-color($primary, default-contrast);
+  $background-color: white; // mat.get-color-from-palette(map-get($theme, background), card);
+  $foreground-color: black; // mat.get-color-from-palette(map-get($theme, foreground), text);
+  $primary-color: darkblue; // mat.get-color-from-palette($primary);
+  $accent-color: pink; // mat.get-color-from-palette(map-get($theme, accent));
+  $default-contrast-color: white; // mat.get-color-from-palette($primary, default-contrast);
   // now set the grid's colours
 
   //Main Theme Variables
