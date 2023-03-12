@@ -28,7 +28,7 @@
     "@angular/cli": "^15.2.1",
     "@angular/compiler-cli": "^15.2.1",
     "@types/jasmine": "^4.3.1",
-    "@types/tabulator-tables": "^5.4.4",
+    "@types/tabulator-tables": "^5.4.5",
     "jasmine-core": "^4.5.0",
     "karma": "^6.4.1",
     "karma-chrome-launcher": "^3.1.1",
