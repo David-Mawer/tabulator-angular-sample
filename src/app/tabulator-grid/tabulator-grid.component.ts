@@ -183,11 +183,11 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
     //submit new value on enter
     input.addEventListener("keydown", function (e) {
-      if (e.keyCode == 13) {
+      if (e.key == 'Enter') {
         onChange();
       }
 
-      if (e.keyCode == 27) {
+      if (e.key == 'Escape') {
         cancel();
       }
     });
