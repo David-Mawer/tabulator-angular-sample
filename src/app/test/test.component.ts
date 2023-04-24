@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { CellComponent } from 'tabulator-tables';
+import { CellComponent, ColumnDefinition } from 'tabulator-tables';
 
 @Component({
   selector: 'app-test',
@@ -9,8 +9,8 @@ import { CellComponent } from 'tabulator-tables';
 export class TestComponent {
 
   // Variables to configure the grid: Begin
-  public tableData: any[];
-  public columnConfig: any[];
+  public tableData: Record<string, unknown>[];
+  public columnConfig: ColumnDefinition[];
   public dateFormat = 'DD/MM/YYYY';
   // Variables to configure the grid: End
 
@@ -20,7 +20,7 @@ export class TestComponent {
   constructor(private changeRef: ChangeDetectorRef) {
     this.columnConfig = [
       { title: "Name", field: "name", width: 150, editor: "input" },
-      { title: "Location", field: "location", width: 130, editor: "list", editorParams: { autocomplete: true, allowEmpty: true, showListOnEmpty: true, valuesLookup: true } },
+      { title: "Location", field: "location", width: 130, editor: "list", editorParams: { autocomplete: true, allowEmpty: true, showListOnEmpty: true, valuesLookup: "all" } },
       { title: "Progress", field: "progress", sorter: "number", hozAlign: "left", formatter: "progress", width: 140, editor: true },
       { title: "Gender", field: "gender", width: 90, editor: "list",
         editorParams: {
@@ -51,7 +51,7 @@ export class TestComponent {
 
   public onCellChanged(data: CellComponent) {
     const colName: string = data.getColumn().getField();
-    const newRowData: any = data.getRow().getData();
+    const newRowData: Record<string, unknown> = data.getRow().getData();
     const sInfo: string = 'Change for "' + newRowData['name'] + '" (id=' + newRowData['id'] + '): Field [' + colName + '] Changed to ' + newRowData[colName];
     console.log(sInfo);
     this.updateInfo = sInfo;

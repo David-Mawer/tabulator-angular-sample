@@ -23,20 +23,20 @@ import * as moment from 'moment';
 export class TabulatorGridComponent implements OnChanges, OnDestroy {
   @ViewChild('tabularGridWrapper', { static: true }) wrapperDiv!: ElementRef<HTMLDivElement>;
 
-  @Input() tableData: any[] = [];
+  @Input() tableData: Record<string, unknown>[] = [];
   @Input() columnConfig: ColumnDefinition[] = [];
   @Input() dateFormat = '';
   @Input() height = ''; // default is to auto-adjust height with the grid contents.
   // These are for passing grid events back to the parent component.
   @Output() buildingTable = new EventEmitter<void>();
   @Output() builtTable = new EventEmitter<void>();
-  @Output() loadingData = new EventEmitter<any[]>();
-  @Output() loadedData = new EventEmitter<any[]>();
+  @Output() loadingData = new EventEmitter<Record<string, unknown>[]>();
+  @Output() loadedData = new EventEmitter<Record<string, unknown>[]>();
   @Output() cellChanged = new EventEmitter<CellComponent>();
 
   // private variables for keeping track of the table.
   private tableDiv = document.createElement('div'); // this is the div that will contain that tabulator-grid HTML.
-  private myTable: any; // this will become a reference to the tabulator-grid object
+  private myTable?: TabulatorFull; // this will become a reference to the tabulator-grid object
   private gridClosing = false;
 
   constructor() {
@@ -118,11 +118,11 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //cell - cell 
     this.cellChanged.emit(cell);
   }
-  private dataLoading(data: any[]) {
+  private dataLoading(data: Record<string, unknown>[]) {
     //data - the data loading into the table
     this.loadingData.emit(data);
   }
-  private dataLoaded(data: any[]) {
+  private dataLoaded(data: Record<string, unknown>[]) {
     //data - the data loading into the table
     this.loadedData.emit(data);
   }
@@ -132,9 +132,9 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
   //////////////////////////////////////////////////////////////////
   // Date Handling: Begin
-  private dateSorter(a: any, b: any,
+  private dateSorter(a: string, b: string,
     aRow: RowComponent, bRow: RowComponent, column: ColumnComponent,
-     dir: any, sorterParams: any) {
+     dir: string, sorterParams: Record<string, undefined>) {
     //a, b - the two values being compared
     //aRow, bRow - the row components for the values being compared (useful if you need to access additional fields in the row data for the sort)
     //column - the column component for the column being sorted
