@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnChanges, Input, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
 // tabular grid: https://github.com/olifolkerd/tabulator
-import { CellComponent, ColumnComponent, RowComponent, TabulatorFull } from 'tabulator-tables';
+import { CellComponent, ColumnComponent, ColumnDefinition, EmptyCallback, RowComponent, TabulatorFull, ValueBooleanCallback, ValueVoidCallback } from 'tabulator-tables';
 import * as moment from 'moment';
 
 /*
@@ -24,9 +24,9 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   @ViewChild('tabularGridWrapper', { static: true }) wrapperDiv!: ElementRef<HTMLDivElement>;
 
   @Input() tableData: any[] = [];
-  @Input() columnConfig: any[] = [];
-  @Input() dateFormat: string = '';
-  @Input() height: string = ''; // default is to auto-adjust height with the grid contents.
+  @Input() columnConfig: ColumnDefinition[] = [];
+  @Input() dateFormat = '';
+  @Input() height = ''; // default is to auto-adjust height with the grid contents.
   // These are for passing grid events back to the parent component.
   @Output() buildingTable = new EventEmitter<void>();
   @Output() builtTable = new EventEmitter<void>();
@@ -37,7 +37,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   // private variables for keeping track of the table.
   private tableDiv = document.createElement('div'); // this is the div that will contain that tabulator-grid HTML.
   private myTable: any; // this will become a reference to the tabulator-grid object
-  private gridClosing: boolean = false;
+  private gridClosing = false;
 
   constructor() {
     // Default the date format if it was not specified.
@@ -140,21 +140,25 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //column - the column component for the column being sorted
     //dir - the direction of the sort ("asc" or "desc")
     //sorterParams - sorterParams object from column definition array
-    var date1 = moment(a, this.dateFormat);
-    var date2 = moment(b, this.dateFormat);
+    const date1 = moment(a, this.dateFormat);
+    const date2 = moment(b, this.dateFormat);
     return date1.diff(date2, "seconds"); // return the difference between the two dates
   }
 
-  private dateEditor(cell: CellComponent, onRendered: Function, success: Function, cancel: Function) {
+  private dateEditor(cell: CellComponent,
+    onRendered: EmptyCallback,
+    success: ValueBooleanCallback,
+    cancel: ValueVoidCallback,
+    editorParams: Record<string, unknown>) {
     //cell - the cell component for the editable cell
     //onRendered - function to call when the editor has been rendered
     //success - function to call to pass the successfuly updated value to Tabulator
     //cancel - function to call to abort the edit and return to a normal cell
 
     //create and style input
-    var expectedDataFormat = this.dateFormat;
-    var cellValue = moment(cell.getValue(), expectedDataFormat).format("YYYY-MM-DD");
-    var input = document.createElement("input");
+    const expectedDataFormat = this.dateFormat;
+    const cellValue = moment(cell.getValue(), expectedDataFormat).format("YYYY-MM-DD");
+    const input = document.createElement("input");
 
     input.setAttribute("type", "date");
 
@@ -171,10 +175,10 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
     function onChange() {
       if (input.value != cellValue) {
-        var successValue = moment(input.value, "YYYY-MM-DD").format(expectedDataFormat);
+        const successValue = moment(input.value, "YYYY-MM-DD").format(expectedDataFormat);
         success(successValue);
       } else {
-        cancel();
+        cancel(input.value);
       }
     }
 
@@ -188,7 +192,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
       }
 
       if (e.key == 'Escape') {
-        cancel();
+        cancel(input.value);
       }
     });
 

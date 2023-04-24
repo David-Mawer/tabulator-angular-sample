@@ -11,11 +11,11 @@ export class TestComponent {
   // Variables to configure the grid: Begin
   public tableData: any[];
   public columnConfig: any[];
-  public dateFormat: string = 'DD/MM/YYYY';
+  public dateFormat = 'DD/MM/YYYY';
   // Variables to configure the grid: End
 
   // Variable to show updates
-  public updateInfo: string = '{{nothing yet}}';
+  public updateInfo = '{{nothing yet}}';
 
   constructor(private changeRef: ChangeDetectorRef) {
     this.columnConfig = [
@@ -50,9 +50,9 @@ export class TestComponent {
   }
 
   public onCellChanged(data: CellComponent) {
-    var colName: string = data.getColumn().getField();
-    var newRowData: any = data.getRow().getData();
-    var sInfo: string = 'Change for "' + newRowData['name'] + '" (id=' + newRowData['id'] + '): Field [' + colName + '] Changed to ' + newRowData[colName];
+    const colName: string = data.getColumn().getField();
+    const newRowData: any = data.getRow().getData();
+    const sInfo: string = 'Change for "' + newRowData['name'] + '" (id=' + newRowData['id'] + '): Field [' + colName + '] Changed to ' + newRowData[colName];
     console.log(sInfo);
     this.updateInfo = sInfo;
     this.changeRef.detectChanges();
