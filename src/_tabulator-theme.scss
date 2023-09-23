@@ -83,6 +83,7 @@
       -khtml-user-select: none;
       -webkit-user-select: none;
       -o-user-select: none;
+      user-select: none;
 
       &.tabulator-header-hidden {
         display: none;
@@ -373,6 +374,7 @@
       -khtml-user-select: none;
       -webkit-user-select: none;
       -o-user-select: none;
+      user-select: none;
 
       .tabulator-calcs-holder {
         box-sizing: border-box;
@@ -635,6 +637,7 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         -o-user-select: none;
+        user-select: none;
         //handle holder
         .tabulator-row-handle-box {
           width: 80%;
@@ -723,6 +726,7 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         -o-user-select: none;
+        user-select: none;
         height: 15px;
         width: 15px;
         border-radius: 20px;
