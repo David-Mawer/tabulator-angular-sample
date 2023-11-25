@@ -76,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-tabulator:build:production"
+              "buildTarget": "angular-tabulator:build:production"
             },
             "development": {
-              "browserTarget": "angular-tabulator:build:development"
+              "buildTarget": "angular-tabulator:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-tabulator:build"
+            "buildTarget": "angular-tabulator:build"
           }
         },
         "test": {
