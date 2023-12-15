@@ -36,7 +36,7 @@ export class TestComponent {
       },
       { title: "Rating", field: "rating", formatter: "star", hozAlign: "center", width: 100, editor: true },
       { title: "Date Of Birth", field: "dob", hozAlign: "center", sorter: "date", width: 140 },
-      { title: "Driver", field: "car", width: 80, hozAlign: "center", editor: true, formatter: "tickCross" }
+      { title: "Driver", field: "car", width: 80, hozAlign: "center", sorter: "boolean", editor: true, formatter: "tickCross" }
     ];
     this.tableData = [
       { id: 1, name: "Oli Bob", progress: 12, location: "United Kingdom", gender: "male", rating: 1, col: "red", dob: "14/04/1984", car: 1, lucky_no: 5, lorem: "Lorem ipsum dolor sit amet, elit consectetur adipisicing " },
