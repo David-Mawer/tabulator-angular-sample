@@ -17,9 +17,10 @@ import { Utilities } from '../shared/Utilities';
  *
  */
 @Component({
-  selector: 'app-tabulator-grid',
-  templateUrl: './tabulator-grid.component.html',
-  styleUrls: ['./tabulator-grid.component.scss']
+    selector: 'app-tabulator-grid',
+    templateUrl: './tabulator-grid.component.html',
+    styleUrls: ['./tabulator-grid.component.scss'],
+    standalone: true
 })
 export class TabulatorGridComponent implements OnChanges, OnDestroy {
   @ViewChild('tabularGridWrapper', { static: true }) wrapperDiv!: ElementRef<HTMLDivElement>;

@@ -1,10 +1,13 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { CellComponent, ColumnDefinition } from 'tabulator-tables';
+import { TabulatorGridComponent } from '../tabulator-grid/tabulator-grid.component';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss']
+    selector: 'app-test',
+    templateUrl: './test.component.html',
+    styleUrls: ['./test.component.scss'],
+    standalone: true,
+    imports: [TabulatorGridComponent]
 })
 export class TestComponent {
 
