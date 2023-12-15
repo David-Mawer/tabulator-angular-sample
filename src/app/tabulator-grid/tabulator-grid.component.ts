@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild, OnChanges, Input, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
 // tabular grid: https://github.com/olifolkerd/tabulator
 import { CellComponent, ColumnComponent, ColumnDefinition, EmptyCallback, RowComponent, TabulatorFull, ValueBooleanCallback, ValueVoidCallback } from 'tabulator-tables';
-import * as moment from 'moment';
+import { Utilities } from '../shared/Utilities';
+
 
 /*
  * So - the whole point of TypeScript is to make things strictly typed.
@@ -64,7 +65,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
       return;
     }
     // Re-route date sorting and editing to local overrides.
-    //  (allows Angular to decide how/when the moment library is in use)
+    //  (allows Angular to decide how/when the dayjs library is in use)
     this.fastForEach(this.columnConfig, colConfigEntry => {
       if (colConfigEntry.sorter == "date") {
         colConfigEntry.sorter = this.dateSorter.bind(this);
@@ -140,8 +141,8 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //column - the column component for the column being sorted
     //dir - the direction of the sort ("asc" or "desc")
     //sorterParams - sorterParams object from column definition array
-    const date1 = moment(a, this.dateFormat);
-    const date2 = moment(b, this.dateFormat);
+    const date1 = Utilities.newDate(a, this.dateFormat);
+    const date2 = Utilities.newDate(b, this.dateFormat);
     return date1.diff(date2, "seconds"); // return the difference between the two dates
   }
 
@@ -157,7 +158,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
     //create and style input
     const expectedDataFormat = this.dateFormat;
-    const cellValue = moment(cell.getValue(), expectedDataFormat).format("YYYY-MM-DD");
+    const cellValue = Utilities.newDate(cell.getValue(), expectedDataFormat).format("YYYY-MM-DD");
     const input = document.createElement("input");
 
     input.setAttribute("type", "date");
@@ -175,7 +176,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
     function onChange() {
       if (input.value != cellValue) {
-        const successValue = moment(input.value, "YYYY-MM-DD").format(expectedDataFormat);
+        const successValue = Utilities.newDate(input.value, "YYYY-MM-DD").format(expectedDataFormat);
         success(successValue);
       } else {
         cancel(input.value);

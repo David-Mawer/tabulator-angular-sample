@@ -27,8 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "allowedCommonJsDependencies": [
-              "flat",
-              "moment"
+              "dayjs"
             ],
             "assets": [
               "src/favicon.ico",
