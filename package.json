@@ -21,9 +21,9 @@
     "@angular/router": "^17.1.2",
     "dayjs": "^1.11.10",
     "rxjs": "^7.8.1",
-    "tabulator-tables": "^5.5.4",
+    "tabulator-tables": "^5.6.1",
     "tslib": "^2.6.2",
-    "zone.js": "^0.14.3"
+    "zone.js": "^0.14.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.1.2",
@@ -35,7 +35,7 @@
     "@angular/cli": "^17.1.2",
     "@angular/compiler-cli": "^17.1.2",
     "@types/jasmine": "^5.1.4",
-    "@types/tabulator-tables": "^5.5.7",
+    "@types/tabulator-tables": "^5.5.10",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "eslint": "^8.56.0",
