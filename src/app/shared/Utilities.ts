@@ -1,5 +1,5 @@
-import * as customParseFormat from 'dayjs/plugin/customParseFormat'
-import * as dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import dayjs from 'dayjs'
 
 export class Utilities {
   // Create a new instance of the dayjs date object.
