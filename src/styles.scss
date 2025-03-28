@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import './_tabulator-theme.scss';
+@use './_tabulator-theme.scss';
+@use './_tabulator-theme.scss' as tab;
+
 
 ////////////////////////////////////////
 //      Tabulator-Grid mixin          //
 ////////////////////////////////////////
-@include Tabulator-default-theme(null);
+@include tab.Tabulator-default-theme(null);

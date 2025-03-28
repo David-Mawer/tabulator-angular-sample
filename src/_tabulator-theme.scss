@@ -1,39 +1,42 @@
+@use "sass:map";
+@use "sass:color";
+
 @mixin Tabulator-default-theme($theme) {
   // Material like variables...
   // ...if you have theming in you app - then you should set these variables from the theme.
 
   // $primary: map-get($theme, primary);
 
-  $background-color: white; // mat.get-color-from-palette(map-get($theme, background), card);
-  $foreground-color: black; // mat.get-color-from-palette(map-get($theme, foreground), text);
-  $primary-color: darkblue; // mat.get-color-from-palette($primary);
-  $accent-color: pink; // mat.get-color-from-palette(map-get($theme, accent));
-  $default-contrast-color: white; // mat.get-color-from-palette($primary, default-contrast);
+  $background-color: white; // mat.m2-get-color-from-palette(map-get($theme, background), card);
+  $foreground-color: black; // mat.m2-get-color-from-palette(map-get($theme, foreground), text);
+  $primary-color: darkblue; // mat.m2-get-color-from-palette($primary);
+  $accent-color: pink; // mat.m2-get-color-from-palette(map-get($theme, accent));
+  $default-contrast-color: white; // mat.m2-get-color-from-palette($primary, default-contrast);
   // now set the grid's colours
 
   //Main Theme Variables
   $backgroundColor: $background-color !default; //background color of tabulator
-  $borderColor: mix($background-color, $foreground-color, 90%) !default; //border to tabulator
+  $borderColor: color.mix($background-color, $foreground-color, 90%) !default; //border to tabulator
   $textSize: 14px !default; //table text size
   //header themeing
-  $headerBackgroundColor: mix($background-color, $primary-color, 10%) !default; //border to tabulator
-  $headerTextColor: mix($primary-color, $default-contrast-color, 25%) !default; //header text colour
-  $headerBorderColor: mix($background-color, $primary-color, 67%) !default; //header border color
-  $headerSeperatorColor: mix($background-color, $primary-color, 60%) !default; //header bottom seperator color
+  $headerBackgroundColor: color.mix($background-color, $primary-color, 10%) !default; //border to tabulator
+  $headerTextColor: color.mix($primary-color, $default-contrast-color, 25%) !default; //header text colour
+  $headerBorderColor: color.mix($background-color, $primary-color, 67%) !default; //header border color
+  $headerSeperatorColor: color.mix($background-color, $primary-color, 60%) !default; //header bottom seperator color
   $headerMargin: 4px !default; //padding round header
   //column header arrows
-  $sortArrowActive: mix($primary-color, $default-contrast-color, 25%) !default;
-  $sortArrowInactive: mix($primary-color, $default-contrast-color, 55%) !default;
+  $sortArrowActive: color.mix($primary-color, $default-contrast-color, 25%) !default;
+  $sortArrowInactive: color.mix($primary-color, $default-contrast-color, 55%) !default;
 
   //row themeing
   $rowBackgroundColor: $background-color !default; //table row background color
-  $rowAltBackgroundColor: mix($background-color, $primary-color, 85%) !default; //table row background color
-  $rowBorderColor: mix($background-color, $foreground-color, 67%) !default; //table border color
-  $rowTextColor: mix($background-color, $foreground-color, 10%) !default; //table text color
-  $rowHoverBackground: mix($background-color, $accent-color, 73%) !default; //row background color on hover
+  $rowAltBackgroundColor: color.mix($background-color, $primary-color, 85%) !default; //table row background color
+  $rowBorderColor: color.mix($background-color, $foreground-color, 67%) !default; //table border color
+  $rowTextColor: color.mix($background-color, $foreground-color, 10%) !default; //table text color
+  $rowHoverBackground: color.mix($background-color, $accent-color, 73%) !default; //row background color on hover
 
-  $rowSelectedBackground: mix($background-color, $primary-color, 75%) !default; //row background color when selected
-  $rowSelectedBackgroundHover: mix($background-color, $primary-color, 85%) !default; //row background color when selected and hovered
+  $rowSelectedBackground: color.mix($background-color, $primary-color, 75%) !default; //row background color when selected
+  $rowSelectedBackgroundHover: color.mix($background-color, $primary-color, 85%) !default; //row background color when selected and hovered
 
   $editBoxColor: #1D68CD !default; //border color for edit boxes
   $errorColor: #dd0000 !default; //error indication
@@ -102,7 +105,7 @@
         &.tabulator-moving {
           position: absolute;
           border: 1px solid $headerSeperatorColor;
-          background: darken($headerBackgroundColor, 10%);
+          background: color.adjust($headerBackgroundColor, $lightness: -10%, $space: hsl);
           pointer-events: none;
         }
         //hold content of column header
@@ -197,7 +200,7 @@
 
           &:hover {
             cursor: pointer;
-            background-color: darken($headerBackgroundColor, 10%);
+            background-color: color.adjust($headerBackgroundColor, $lightness: -10%, $space: hsl);
           }
 
           &[aria-sort="none"] {
@@ -279,10 +282,10 @@
       .tabulator-calcs-holder {
         box-sizing: border-box;
         min-width: 600%;
-        background: lighten($headerBackgroundColor, 5%) !important;
+        background: color.adjust($headerBackgroundColor, $lightness: 5%, $space: hsl) !important;
 
         .tabulator-row {
-          background: lighten($headerBackgroundColor, 5%) !important;
+          background: color.adjust($headerBackgroundColor, $lightness: 5%, $space: hsl) !important;
 
           .tabulator-col-resize-handle {
             display: none;
@@ -347,7 +350,7 @@
         .tabulator-row {
           &.tabulator-calcs {
             font-weight: bold;
-            background: darken($rowAltBackgroundColor, 5%) !important;
+            background: color.adjust($rowAltBackgroundColor, $lightness: -5%, $space: hsl) !important;
 
             &.tabulator-calcs-top {
               border-bottom: 2px solid $rowBorderColor;
@@ -381,10 +384,10 @@
         width: calc(100% + 20px);
         margin: -5px -10px 5px -10px;
         text-align: left;
-        background: lighten($footerBackgroundColor, 5%) !important;
+        background: color.adjust($footerBackgroundColor, $lightness: 5%, $space: hsl) !important;
 
         .tabulator-row {
-          background: lighten($footerBackgroundColor, 5%) !important;
+          background: color.adjust($footerBackgroundColor, $lightness: 5%, $space: hsl) !important;
 
           .tabulator-col-resize-handle {
             display: none;
