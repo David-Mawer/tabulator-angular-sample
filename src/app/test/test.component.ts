@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, inject } from '@angular/core';
 import { CellComponent, ColumnDefinition } from 'tabulator-tables';
 import { TabulatorGridComponent } from '../tabulator-grid/tabulator-grid.component';
 
@@ -9,6 +9,7 @@ import { TabulatorGridComponent } from '../tabulator-grid/tabulator-grid.compone
     imports: [TabulatorGridComponent]
 })
 export class TestComponent {
+  private changeRef = inject(ChangeDetectorRef);
 
   // Variables to configure the grid: Begin
   public tableData: Record<string, unknown>[];
@@ -19,7 +20,7 @@ export class TestComponent {
   // Variable to show updates
   public updateInfo = '{{nothing yet}}';
 
-  constructor(private changeRef: ChangeDetectorRef) {
+  constructor() {
     this.columnConfig = [
       { title: "Name", field: "name", width: 150, editor: "input" },
       { title: "Location", field: "location", width: 130, editor: "list", editorParams: { autocomplete: true, allowEmpty: true, showListOnEmpty: true, valuesLookup: "all" } },

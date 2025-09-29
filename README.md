@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Then I made a few edits to add the [tabulator grid](https://github.com/olifolkerd/tabulator) - and wrap it in its own component.
 
-(Angular version is now 19)
+(Angular version is now 20)
 
 ## Development server
 
