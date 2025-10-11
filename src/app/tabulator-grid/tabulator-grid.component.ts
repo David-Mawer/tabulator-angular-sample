@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnChanges, Input, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnChanges, signal, SimpleChanges, OnDestroy, input, output } from '@angular/core';
 // tabular grid: https://github.com/olifolkerd/tabulator
 import { CellComponent, ColumnComponent, ColumnDefinition, EmptyCallback, RowComponent, TabulatorFull, ValueBooleanCallback, ValueVoidCallback } from 'tabulator-tables';
 import { Utilities } from '../shared/Utilities';
@@ -25,16 +25,17 @@ import { Utilities } from '../shared/Utilities';
 export class TabulatorGridComponent implements OnChanges, OnDestroy {
   @ViewChild('tabularGridWrapper', { static: true }) wrapperDiv!: ElementRef<HTMLDivElement>;
 
-  @Input() tableData: Record<string, unknown>[] = [];
-  @Input() columnConfig: ColumnDefinition[] = [];
-  @Input() dateFormat = '';
-  @Input() height = ''; // default is to auto-adjust height with the grid contents.
+  readonly tableData = input<Record<string, unknown>[]>([]);
+  readonly columnConfig = input<ColumnDefinition[]>([]);
+  readonly dateFormat = input('');
+  myDateFormat = signal(this.dateFormat());
+  readonly height = input(''); // default is to auto-adjust height with the grid contents.
   // These are for passing grid events back to the parent component.
-  @Output() buildingTable = new EventEmitter<void>();
-  @Output() builtTable = new EventEmitter<void>();
-  @Output() loadingData = new EventEmitter<Record<string, unknown>[]>();
-  @Output() loadedData = new EventEmitter<Record<string, unknown>[]>();
-  @Output() cellChanged = new EventEmitter<CellComponent>();
+  buildingTable = output<void>();
+  builtTable = output<void>();
+  loadingData = output<Record<string, unknown>[]>();
+  loadedData = output<Record<string, unknown>[]>();
+  cellChanged = output<CellComponent>();
 
   // private variables for keeping track of the table.
   private tableDiv = document.createElement('div'); // this is the div that will contain that tabulator-grid HTML.
@@ -43,7 +44,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
   constructor() {
     // Default the date format if it was not specified.
-    this.dateFormat = this.dateFormat || 'DD MMM YYYY';
+    this.myDateFormat.set(this.dateFormat() || 'DD MMM YYYY');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -62,12 +63,13 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   }
 
   private drawTable(changes: SimpleChanges): void {
-    if ((this.gridClosing) || (!this.columnConfig)) {
+    const columnConfig = this.columnConfig();
+    if ((this.gridClosing) || (!columnConfig)) {
       return;
     }
     // Re-route date sorting and editing to local overrides.
     //  (allows Angular to decide how/when the dayjs library is in use)
-    this.fastForEach(this.columnConfig, colConfigEntry => {
+    this.fastForEach(columnConfig, colConfigEntry => {
       if (colConfigEntry.sorter == "date") {
         colConfigEntry.sorter = this.dateSorter.bind(this);
         colConfigEntry.editor = this.dateEditor.bind(this);
@@ -80,11 +82,11 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
       // create the table with the given Angular parameters
       // for details about the Tabulator parameters - check http://tabulator.info/docs/4.2/options
       this.myTable = new TabulatorFull(this.tableDiv, {
-        data: this.tableData || [],
+        data: this.tableData() || [],
         reactiveData: true, // enable data reactivity - means that array content changes get reflected by the grid (without Angular having to worry)
-        columns: this.columnConfig,
+        columns: columnConfig,
         layout: 'fitData',
-        height: this.height,
+        height: this.height(),
       });
       // Capture some of the events and pass them back to the declaring code.
       // http://tabulator.info/docs/5.0/events
@@ -98,10 +100,10 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     } else {
       // Check what changed, and only update that stuff
       if (changes['columnConfig']) {
-        this.myTable.setColumns(this.columnConfig);
+        this.myTable.setColumns(columnConfig);
       }
       if (changes['tableData']) {
-        this.myTable.setData(this.tableData);
+        this.myTable.setData(this.tableData());
       }
 
     }
@@ -142,8 +144,8 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //column - the column component for the column being sorted
     //dir - the direction of the sort ("asc" or "desc")
     //sorterParams - sorterParams object from column definition array
-    const date1 = Utilities.newDate(a, this.dateFormat);
-    const date2 = Utilities.newDate(b, this.dateFormat);
+    const date1 = Utilities.newDate(a, this.myDateFormat());
+    const date2 = Utilities.newDate(b, this.myDateFormat());
     return date1.diff(date2, "seconds"); // return the difference between the two dates
   }
 
@@ -158,7 +160,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //cancel - function to call to abort the edit and return to a normal cell
 
     //create and style input
-    const expectedDataFormat = this.dateFormat;
+    const expectedDataFormat = this.myDateFormat();
     const cellValue = Utilities.newDate(cell.getValue(), expectedDataFormat).format("YYYY-MM-DD");
     const input = document.createElement("input");
 
