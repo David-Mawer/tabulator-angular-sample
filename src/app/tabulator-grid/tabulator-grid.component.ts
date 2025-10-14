@@ -30,12 +30,13 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   readonly dateFormat = input('');
   myDateFormat = signal(this.dateFormat());
   readonly height = input(''); // default is to auto-adjust height with the grid contents.
+  
   // These are for passing grid events back to the parent component.
-  buildingTable = output<void>();
-  builtTable = output<void>();
-  loadingData = output<Record<string, unknown>[]>();
-  loadedData = output<Record<string, unknown>[]>();
-  cellChanged = output<CellComponent>();
+  readonly buildingTable = output<void>();
+  readonly builtTable = output<void>();
+  readonly loadingData = output<Record<string, unknown>[]>();
+  readonly loadedData = output<Record<string, unknown>[]>();
+  readonly cellChanged = output<CellComponent>();
 
   // private variables for keeping track of the table.
   private tableDiv = document.createElement('div'); // this is the div that will contain that tabulator-grid HTML.
