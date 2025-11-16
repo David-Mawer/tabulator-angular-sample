@@ -12,6 +12,7 @@
   $primary-color: darkblue; // mat.m2-get-color-from-palette($primary);
   $accent-color: pink; // mat.m2-get-color-from-palette(map-get($theme, accent));
   $default-contrast-color: white; // mat.m2-get-color-from-palette($primary, default-contrast);
+  $warn-color: red; // mat.m2-get-color-from-palette(map.get($theme, warn));
   // now set the grid's colours
 
   //Main Theme Variables
@@ -21,8 +22,8 @@
   //header themeing
   $headerBackgroundColor: color.mix($background-color, $primary-color, 10%) !default; //border to tabulator
   $headerTextColor: color.mix($primary-color, $default-contrast-color, 25%) !default; //header text colour
-  $headerBorderColor: color.mix($background-color, $primary-color, 67%) !default; //header border color
-  $headerSeperatorColor: color.mix($background-color, $primary-color, 60%) !default; //header bottom seperator color
+  $headerBorderColor: color.mix($background-color, $primary-color, 60%) !default; //header border color
+  $headerSeperatorColor: color.mix($background-color, $primary-color, 67%) !default; //header bottom seperator color
   $headerMargin: 4px !default; //padding round header
   //column header arrows
   $sortArrowActive: color.mix($primary-color, $default-contrast-color, 25%) !default;
@@ -31,21 +32,21 @@
   //row themeing
   $rowBackgroundColor: $background-color !default; //table row background color
   $rowAltBackgroundColor: color.mix($background-color, $primary-color, 85%) !default; //table row background color
-  $rowBorderColor: color.mix($background-color, $foreground-color, 67%) !default; //table border color
+  $rowBorderColor: color.mix($background-color, $foreground-color, 60%) !default; //table border color
   $rowTextColor: color.mix($background-color, $foreground-color, 10%) !default; //table text color
   $rowHoverBackground: color.mix($background-color, $accent-color, 73%) !default; //row background color on hover
 
   $rowSelectedBackground: color.mix($background-color, $primary-color, 75%) !default; //row background color when selected
   $rowSelectedBackgroundHover: color.mix($background-color, $primary-color, 85%) !default; //row background color when selected and hovered
 
-  $editBoxColor: #1D68CD !default; //border color for edit boxes
-  $errorColor: #dd0000 !default; //error indication
+  $editBoxColor: color.mix($background-color, $accent-color, 73%) !default; //border color for edit boxes
+  $errorColor: $warn-color !default; //error indication
   //footer themeing
-  $footerBackgroundColor: #e6e6e6 !default; //border to tabulator
-  $footerTextColor: #555 !default; //footer text colour
-  $footerBorderColor: #aaa !default; //footer border color
-  $footerSeperatorColor: #999 !default; //footer bottom seperator color
-  $footerActiveColor: #d00 !default; //footer bottom active text color
+  $footerBackgroundColor: color.mix($background-color, $primary-color, 10%) !default; //border to tabulator
+  $footerTextColor: color.mix($background-color, $primary-color, 90%) !default; //footer text colour
+  $footerBorderColor: color.mix($background-color, $primary-color, 60%) !default; //footer border color
+  $footerSeperatorColor: color.mix($background-color, $primary-color, 67%) !default; //footer bottom seperator color
+  $footerActiveColor: color.mix($background-color, $primary-color, 80%) !default; //footer bottom active text color
   //Tabulator Containing Element
   .tabulator {
     position: relative;
