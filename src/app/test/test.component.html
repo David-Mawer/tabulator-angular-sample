@@ -8,7 +8,6 @@
     <!-- this is the tabulator grid (wrapped inside an angular component) -->
     <app-tabulator-grid [tableData]="tableData"
                         [columnConfig]="columnConfig"
-                        [height]="'320px'"
                         [dateFormat]="dateFormat"
                         (cellChanged)="onCellChanged($event)">
     </app-tabulator-grid>
