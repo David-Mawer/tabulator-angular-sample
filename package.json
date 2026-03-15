@@ -27,9 +27,18 @@
   },
   "devDependencies": {
     "@angular/build": "^21.2.2",
+    "@angular-eslint/builder": "^21.3.0",
+    "@angular-eslint/eslint-plugin": "^21.3.0",
+    "@angular-eslint/eslint-plugin-template": "^21.3.0",
+    "@angular-eslint/schematics": "^21.3.0",
+    "@angular-eslint/template-parser": "^21.3.0",
     "@angular/cli": "^21.2.2",
     "@angular/compiler-cli": "^21.2.4",
     "@types/tabulator-tables": "^6.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
     "typescript": "^5.9.3"
   }
 }
