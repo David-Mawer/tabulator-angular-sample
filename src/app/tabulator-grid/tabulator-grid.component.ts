@@ -27,8 +27,7 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
 
   readonly tableData = input<Record<string, unknown>[]>([]);
   readonly columnConfig = input<ColumnDefinition[]>([]);
-  readonly dateFormat = input('');
-  myDateFormat = signal(this.dateFormat());
+  readonly dateFormat = input('DD MM YYYY');
   readonly height = input(''); // default is to auto-adjust height with the grid contents.
   
   // These are for passing grid events back to the parent component.
@@ -44,8 +43,6 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
   private gridClosing = false;
 
   constructor() {
-    // Default the date format if it was not specified.
-    this.myDateFormat.set(this.dateFormat() || 'DD MMM YYYY');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -145,8 +142,8 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //column - the column component for the column being sorted
     //dir - the direction of the sort ("asc" or "desc")
     //sorterParams - sorterParams object from column definition array
-    const date1 = Utilities.newDate(a, this.myDateFormat());
-    const date2 = Utilities.newDate(b, this.myDateFormat());
+    const date1 = Utilities.newDate(a, this.dateFormat());
+    const date2 = Utilities.newDate(b, this.dateFormat());
     return date1.diff(date2, "seconds"); // return the difference between the two dates
   }
 
@@ -161,7 +158,8 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //cancel - function to call to abort the edit and return to a normal cell
 
     //create and style input
-    const expectedDataFormat = this.myDateFormat();
+    debugger;
+    const expectedDataFormat = this.dateFormat();
     const cellValue = Utilities.newDate(cell.getValue(), expectedDataFormat).format("YYYY-MM-DD");
     const input = document.createElement("input");
 
