@@ -158,7 +158,6 @@ export class TabulatorGridComponent implements OnChanges, OnDestroy {
     //cancel - function to call to abort the edit and return to a normal cell
 
     //create and style input
-    debugger;
     const expectedDataFormat = this.dateFormat();
     const cellValue = Utilities.newDate(cell.getValue(), expectedDataFormat).format("YYYY-MM-DD");
     const input = document.createElement("input");
