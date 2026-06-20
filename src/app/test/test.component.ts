@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, ChangeDetectorRef, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CellComponent, ColumnDefinition } from 'tabulator-tables';
 import { TabulatorGridComponent } from '../tabulator-grid/tabulator-grid.component';
 
@@ -6,6 +6,7 @@ import { TabulatorGridComponent } from '../tabulator-grid/tabulator-grid.compone
     selector: 'app-test',
     templateUrl: './test.component.html',
     styleUrls: ['./test.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [TabulatorGridComponent]
 })
 export class TestComponent {

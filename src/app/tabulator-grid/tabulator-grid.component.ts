@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnChanges, signal, SimpleChanges, OnDestroy, input, output } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnChanges, signal, SimpleChanges, OnDestroy, input, output, ChangeDetectionStrategy } from '@angular/core';
 // tabular grid: https://github.com/olifolkerd/tabulator
 import { CellComponent, ColumnComponent, ColumnDefinition, EmptyCallback, RowComponent, TabulatorFull, ValueBooleanCallback, ValueVoidCallback } from 'tabulator-tables';
 import { Utilities } from '../shared/Utilities';
@@ -20,6 +20,7 @@ import { Utilities } from '../shared/Utilities';
     selector: 'app-tabulator-grid',
     templateUrl: './tabulator-grid.component.html',
     styleUrls: ['./tabulator-grid.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true
 })
 export class TabulatorGridComponent implements OnChanges, OnDestroy {
